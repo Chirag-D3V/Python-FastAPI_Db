@@ -1,9 +1,3 @@
-# -------------------------------
-# schemas.py — Pydantic Schemas for Request & Response
-# Author: Chirag Gupta
-# Description: Defines structured request and response models used in FastAPI routes.
-# -------------------------------
-
 from pydantic import BaseModel, EmailStr  # EmailStr auto-validates proper email format
 from typing import Optional               # Used for optional fields (like in update requests)
 
