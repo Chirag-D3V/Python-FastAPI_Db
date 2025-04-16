@@ -1,12 +1,3 @@
-# -------------------------------
-# Basic SQLAlchemy CRUD Test Runner
-# Author: Chirag Gupta
-# Description: Runs CRUD operations in sequence to test the database setup.
-# Just run app.py — the user will be created, fetched, updated, and deleted.
-# -------------------------------
-
-# ---------------------- IMPORTS ----------------------
-
 import logging  # For structured log output instead of raw print statements
 from sqlalchemy.orm import Session  # Typing hint for database session
 from typing import Optional  # For safe type hints
