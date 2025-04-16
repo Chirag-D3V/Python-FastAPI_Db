@@ -1,9 +1,3 @@
-# -------------------------------
-# models_and_app.py
-# SQLAlchemy User Model + FastAPI Setup + Pydantic Schemas (Fully Explained)
-# Author: Chirag Gupta
-# -------------------------------
-
 # ---------------------- IMPORTS ----------------------
 
 from sqlalchemy import Column, Integer, String              # SQLAlchemy column types
@@ -24,4 +18,3 @@ class User(Base):
     name = Column(String, index=True)                         # Name field with index for faster search
     email = Column(String, unique=True, index=True)           # Unique email field (also indexed)
     age = Column(Integer)                                     # Age field (no indexing needed here)
-
