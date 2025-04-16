@@ -1,9 +1,3 @@
-# -------------------------------
-# FastAPI Application (CRUD with SQLAlchemy Integration)
-# Author: Chirag Gupta
-# Description: Core FastAPI app with SQLAlchemy database integration for CRUD operations with detailed explanations
-# -------------------------------
-
 from fastapi import FastAPI, Depends, HTTPException
 from sqlalchemy.orm import Session
 from database import SessionLocal, create_tables  # Importing the DB session and table creation function
@@ -11,21 +5,6 @@ import crud, schemas  # Import CRUD operations, ORM models, and Pydantic schemas
 
 # Create FastAPI app instance
 app = FastAPI()
-
-# -------------------------------
-# FastAPI Event Handling
-# -------------------------------
-
-#  FastAPI allows you to run functions at specific points during the application lifecycle.
-# In this case, we'll run the create_tables() function when the app starts up.
-
-# @app.on_event("startup")
-# def on_startup():
-#     """
-#     This function is called when the app starts up.
-#     It ensures that the database tables are created before the app handles requests.
-#     """
-#     create_tables()  # Create all the tables in the database
 
 # -------------------------------
 # Dependency to Get DB Session
@@ -108,45 +87,3 @@ def delete_user_route(user_id: int, db: Session = Depends(get_db)):
     if not db_user:
         raise HTTPException(status_code=404, detail="User not found")
     return db_user
-
-# -------------------------------
-# Important Notes:
-# -------------------------------
-
-#  App Lifecycle:
-# - FastAPI provides event hooks (e.g., @app.on_event("startup")) to run functions during specific stages of the app's lifecycle.
-# - In this case, the on_startup function is used to create the tables in the database as soon as the app starts.
-
-#  Dependency Injection:
-# - FastAPI uses the Depends() function to handle dependencies like database sessions.
-# - When a route function requires access to the database, the get_db() function is called, which provides a fresh DB session.
-# - After the request is processed, the DB session is automatically closed.
-
-#  CRUD Operations:
-# - The routes are connected to the CRUD operations that are imported from the crud.py file.
-# - Each route function handles specific HTTP methods (GET, POST, PUT, DELETE) and invokes the corresponding CRUD operation.
-
-#  Session Management:
-# - SessionLocal() creates a new session object, which is used to interact with the database.
-# - It's important to close the session after each request to release the database connection, which is handled in the finally block of get_db().
-
-# -------------------------------
-#  BONUS: View Data and Tables in SQLite
-# -------------------------------
-
-#  After running this FastAPI app and making some requests, you can visualize the data created in the SQLite database.
-
-# If you're using DB Browser for SQLite, follow these steps to see your database tables:
-# 1. Open DB Browser for SQLite (download from https://sqlitebrowser.org/)
-# 2. Click on “Open Database” and select systemdb.sqlite3 (the database created by this FastAPI app)
-# 3. In the “Database Structure” tab, you will see the tables that have been created (e.g., users table)
-# 4. You can view the table's content in the “Browse Data” tab, which will show all the records in the table.
-# 5. You can also run custom SQL queries to check the data using the “Execute SQL” tab.
-
-#  Pro Tip:
-# After each API request (e.g., creating or deleting users), check the database to confirm the changes.
-# This is an excellent way to visualize how your FastAPI app is interacting with the database.
-
-#  Remember:
-# - You need to ensure that your tables are created during startup (on_startup()), and that they match the models defined in models.py.
-# - DB Browser for SQLite provides a clean, visual way to interact with and inspect your SQLite database.
