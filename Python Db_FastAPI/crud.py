@@ -1,9 +1,3 @@
-# -------------------------------
-# CRUD Operations (Create, Read, Update, Delete)
-# Author: Chirag Gupta
-# Description: Core CRUD operations on the User model using SQLAlchemy ORM
-# -------------------------------
-
 from sqlalchemy.orm import session                  # Session from SQLAlchemy to interact with the DB
 from models import User                              # User model (table) imported for CRUD operations
 
@@ -120,27 +114,3 @@ def delete_user(db_session: session, user_id: int):
             return None                 # Return None indicating failure
     else:
         return None  # Return None if the user wasn't found
-
-# -------------------------------
-# Important Notes:
-# -------------------------------
-# - db_session.refresh(): 
-#     This method ensures that after committing or updating data, the instance is synchronized with the latest database values (e.g., the auto-generated ID after a user is inserted).
-#     It's especially important in the case of operations like `create_user()` or `update_user()` where changes are committed to the DB.
-
-# - Error Handling (try-except):
-#     The try-except block prevents the application from crashing in case of errors (like constraint violations, database connectivity issues, or invalid input). 
-#     Any exception is caught, the transaction is rolled back, and the error message is logged.
-#     Rollback ensures that partial or invalid data doesn't get committed to the database.
-
-# -------------------------------
-# Summary Table of Operations
-# -------------------------------
-'''
-| Operation         | Description                                                                                 |
-|-------------------|---------------------------------------------------------------------------------------------|
-| `create_user()`   | Adds a new user to the database, commits, and returns the created user with assigned ID     |
-| `get_user_by_id()`| Fetches a user by ID from the database, returns the user object or None if not found        |
-| `update_user()`   | Updates a user's details, commits the changes, and returns the updated user object          |
-| `delete_user()`   | Deletes a user from the database, commits the deletion, and returns the deleted user object |
-'''
